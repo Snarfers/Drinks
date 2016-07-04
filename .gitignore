@@ -1,2 +1,12 @@
 #Ignore the virutal environment folder
-env/ 
+env/
+
+#Python Ignores
+*.pyc
+__pycache__/ 
+
+#Database Ignores
+*.db
+
+#Cache Ignores
+.DS_Store 
