@@ -1,6 +1,7 @@
 from app import db
 from models.ingredient import Ingredient
 from models.portion import Portion
+from models.recipe import Recipe, recipe_ingredient
 
 ingredients = [
   'ice',
@@ -51,6 +52,12 @@ def create_portion(portion_data):
     db.session.commit()
   except:
     db.session.rollback()
-    
+
 for portion in portions:
     create_portion(portion)
+
+recipe = Recipe("Manhattan") 
+recipe.ingredients.append(Ingredient("vermouth")) 
+recipe.ingredients.append(Ingredient("orange")) 
+db.session.add(recipe)
+db.session.commit()
