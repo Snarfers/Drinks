@@ -3,10 +3,10 @@ env/
 
 #Python Ignores
 *.pyc
-__pycache__/ 
+__pycache__/
 
 #Database Ignores
 *.db
 
 #Cache Ignores
-.DS_Store 
+*.DS_Store
