@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort
 
-from app import app
+from app import app, db
 
 import json
 
