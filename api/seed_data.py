@@ -55,9 +55,3 @@ def create_portion(portion_data):
 
 for portion in portions:
     create_portion(portion)
-
-recipe = Recipe("Manhattan") 
-recipe.ingredients.append(Ingredient("vermouth")) 
-recipe.ingredients.append(Ingredient("orange")) 
-db.session.add(recipe)
-db.session.commit()
