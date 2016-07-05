@@ -1,7 +1,10 @@
 from app import db
 from models.ingredient import Ingredient
 from models.portion import Portion
-from models.recipe import Recipe, recipe_ingredient
+from models.recipe import Recipe
+
+db.create_all()
+
 
 ingredients = [
   'ice',
