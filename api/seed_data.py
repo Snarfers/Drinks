@@ -1,7 +1,7 @@
 from app import db
-from models.ingredient import Ingredient
+from models.ingredient import Ingredient, IngredientTag
 from models.portion import Portion
-from models.recipe import Recipe
+from models.recipe import Recipe, RecipeIngredient
 
 db.create_all()
 
@@ -36,21 +36,17 @@ portions = [
 ]
 
 def create_ingredient(ingredient_name):
-  try:
-    ingredient = Ingredient(name=ingredient_name)
-    db.session.add(ingredient)
-    db.session.commit()
-  except:
-    db.session.rollback()
+  ingredient = Ingredient(name=ingredient_name)
+  db.session.add(ingredient)
+  db.session.commit()
+
 
 for ingredient in ingredients:
   create_ingredient(ingredient)
 
-
-
 def create_portion(portion_data):
   try:
-    portion = Portion(portion_data[1], portion_data[0])
+    portion = Portion(name=portion_data[1], abbrivation=portion_data[0])
     db.session.add(portion)
     db.session.commit()
   except:
@@ -58,3 +54,14 @@ def create_portion(portion_data):
 
 for portion in portions:
     create_portion(portion)
+
+
+recipe = Recipe(name="LemonLime") #Create a Recipe
+r_ingredient = Ingredient.query.filter_by(name="lime").first() #Get the lime ingredient
+r_ingredient.tags.append(IngredientTag(key="cost", value="$5")) # The lime costs $5
+r_portion = Portion.query.filter_by(name="cup").first() #
+recipeIngredient = RecipeIngredient(ingredient=r_ingredient, quantity="half", portion=r_portion)
+recipe.ingredients.append(recipeIngredient)
+
+db.session.add(recipe)
+db.session.commit()
