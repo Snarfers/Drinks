@@ -9,11 +9,8 @@ recipe_recipeIngredient = db.Table('recipe_recipeingredient', db.metadata,
 class Recipe(db.Model):
   __tablename__ = 'recipe'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(100), unique=True)
+  name = db.Column(db.String(100), unique=True, index=True)
   ingredients = db.relationship('RecipeIngredient', secondary=recipe_recipeIngredient)
-
-  def __init__(self, name):
-    self.name = name
 
   def __repr__(self):
     return '<Ingredient %r>' % self.name
@@ -26,8 +23,3 @@ class RecipeIngredient(db.Model):
     quantity = db.Column(db.String)
     portion = db.relationship('Portion')
     portion_id = db.Column(db.Integer, db.ForeignKey('portion.id'))
-
-    def __init__(self, ingredient_id, quantity, portion_id):
-        self.ingredient_id = ingredient_id
-        self.quantity = quantity
-        self.portion_id = portion_id
