@@ -1,10 +1,12 @@
-from app import db
+from api import db
+print("in recipe model")
 
-#Association Tables
+# Association Tables
 recipe_recipeIngredient = db.Table('recipe_recipeingredient', db.metadata,
     db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
     db.Column('recipeingredient_id', db.Integer, db.ForeignKey('recipeingredient.id'))
 )
+
 
 class Recipe(db.Model):
   __tablename__ = 'recipe'
@@ -14,6 +16,7 @@ class Recipe(db.Model):
 
   def __repr__(self):
     return '<Ingredient %r>' % self.name
+
 
 class RecipeIngredient(db.Model):
     __tablename__ = "recipeingredient"

@@ -1,27 +1,24 @@
-import json
-
 from flask import request, jsonify, abort
 
-from app import app, db, row_to_dict
-from app import COMMON
-
-#Importing models
-from models.recipe import Recipe
+from api import app, db, COMMON, row_to_dict
 
 
-@app.route(COMMON['API_ROUTE'] + '/recipe/all', methods=['GET'])
+# Importing models
+from api.models.recipe import Recipe
+
+@app.route('/api/recipe/all', methods=['GET'])
 def recipe_all():
     recipes = Recipe.query.all()
     response = []
 
     for recipe in recipes:
-        recipe_data = {}
+        recipe_data = dict()
         recipe_data['name'] = recipe.name
         recipe_data['ingredients'] = []
         for ingredient in recipe.ingredients:
-            ingredient_data = {}
+            ingredient_data = dict()
             ingredient_data['name'] = ingredient.ingredient.name
-            ingredient_data['portion'] = {"name": ingredient.portion.name, "abbriviation": ingredient.portion.abbrivation}
+            ingredient_data['portion'] = {"name": ingredient.portion.name, "abbreviation": ingredient.portion.abbrivation}
             ingredient_data['quantity'] = ingredient.quantity
             recipe_data['ingredients'].append(ingredient_data)
         response.append(recipe_data)
@@ -29,9 +26,9 @@ def recipe_all():
     return jsonify(response)
 
 
-@app.route(COMMON['API_ROUTE'] + '/recipe/<int:index>')
+@app.route('/api/recipe/<int:index>')
 def recipe_index(index):
-    recipe = recipe.query.filter_by(id=index).first()
+    recipe = Recipe.query.filter_by(id=index).first()
 
     if(recipe == None):
         abort(404)
@@ -41,7 +38,7 @@ def recipe_index(index):
     return jsonify(response)
 
 
-@app.route(COMMON['API_ROUTE'] + '/recipe/create', methods=['POST'])
+@app.route('/api/recipe/create', methods=['POST'])
 def recipe_create():
     data = request.get_json()
 

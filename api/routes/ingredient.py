@@ -1,45 +1,52 @@
-import json
-
 from flask import request, jsonify, abort
 
-from app import app, db, row_to_dict
-from app import COMMON
+from api import app, db, COMMON, row_to_dict
 
-#Importing models
-from models.ingredient import Ingredient
+# Importing models
+from api.models.ingredient import Ingredient
+from api.models.portion import Portion
 
 
-@app.route(COMMON['API_ROUTE'] + '/ingredient/all', methods=['GET'])
+@app.route('/api/ingredient/all', methods=['GET'])
 def ingredient_all():
-  try:
     ingredients = Ingredient.query.all()
     response = [row_to_dict(ingredient) for ingredient in ingredients]
-  except:
-    abort(500)
 
-  return jsonify(response)
+    return jsonify(response)
 
 
-@app.route(COMMON['API_ROUTE'] + '/ingredient/<int:index>')
+@app.route('/api/ingredient/<int:index>')
 def ingredient_index(index):
-  ingredient = Ingredient.query.filter_by(id=index).first()
+    ingredient = Ingredient.query.filter_by(id=index).first()
 
-  if(ingredient == None):
-    abort(404)
+    if(ingredient == None):
+        abort(404)
 
-  response = row_to_dict(ingredient)
+    response = row_to_dict(ingredient)
 
-  return jsonify(response)
+    return jsonify(response)
 
 
-@app.route(COMMON['API_ROUTE'] + '/ingredient/create', methods=['POST'])
+@app.route('/api/ingredient/<string:category>')
+def ingredient_category(category):
+    ingredients = Ingredient.query.filter_by(category=category).all()
+
+    if len(ingredients) == 0:
+        abort(404)
+
+    response = [row_to_dict(ingredient) for ingredient in ingredients]
+
+    return jsonify(response)
+
+
+@app.route('/api/ingredient/create', methods=['POST'])
 def ingredient_create():
-  data = request.get_json()
+    ingredient = request.get_json()
 
-  try:
-    db.session.add(Ingredient(name=data['name']))
-    db.session.commit()
-  except:
-    abort(500)
+    try:
+        db.session.add(Ingredient(**ingredient))
+        db.session.commit()
+    except:
+        db.rollback()
 
-  return jsonify(COMMON['SUCCESS'])
+    return jsonify(COMMON['SUCCESS'])

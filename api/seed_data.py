@@ -1,4 +1,4 @@
-from app import db
+from api import db
 from models.ingredient import Ingredient, IngredientTag
 from models.portion import Portion
 from models.recipe import Recipe, RecipeIngredient
@@ -7,61 +7,53 @@ db.create_all()
 
 
 ingredients = [
-  'ice',
-  'lime',
-  'lemon',
-  'orange',
-  'salt',
-  'pepper',
-  'sugar'
+    {'name': 'ice', 'category': 'common', 'subcategory': 'frozen'},
+    {'name': 'lime', 'category': 'fruit', 'subcategory': 'sour'},
+    {'name': 'lemon', 'category': 'fruit', 'subcategory': 'sour'},
+    {'name': 'orange', 'category': 'fruit', 'subcategory': 'sweet'},
+    {'name': 'salt', 'category': 'common', 'subcategory': 'additive'},
+    {'name': 'pepper', 'category': 'common', 'subcategory': 'additive'},
+    {'name': 'sugar', 'category': 'common', 'subcategory': 'additive'}
 ]
 
 portions = [
-  ['tsp', 'teaspoon'],
-  ['tbsp', 'tablespoon'],
-  ['fl oz', 'fluid ounce'],
-  ['c', 'cup'],
-  ['pt', 'pint'],
-  ['qt', 'quart'],
-  ['gal', 'gallon'],
-  ['ml', 'milliliter'],
-  ['l', 'liter'],
-  ['lb', 'pound'],
-  ['oz', 'ounce'],
-  ['g', 'gram'],
-  ['kg', 'kilogram'],
-  ['cm', 'centimeter'],
-  ['m', 'meter'],
-  ['in', 'inch']
+    {'name': 'teaspoon', 'abbreviation': 'tsp'},
+    {'name': 'tablespoon', 'abbreviation': 'tbsp'},
+    {'name': 'fluid ounce', 'abbreviation': 'fl oz'},
+    {'name': 'cup', 'abbreviation': 'c'},
+    {'name': 'pint', 'abbreviation': 'pt'},
+    {'name': 'quart', 'abbreviation': 'qt'},
+    {'name': 'gal', 'abbreviation': 'gl'},
+    {'name': 'milliliter', 'abbreviation': 'milliliter'},
+    {'name': 'liter', 'abbreviation': 'l'},
+    {'name': 'pound', 'abbreviation': 'lb'},
+    {'name': 'ounce', 'abbreviation': 'oz'},
+    {'name': 'gram', 'abbreviation': 'g'},
+    {'name': 'kilogram', 'abbreviation': 'kg'},
+    {'name': 'centimeter', 'abbreviation': 'cm'},
+    {'name': 'meter', 'abbreviation': 'm'},
+    {'name': 'inch', 'abbreviation': 'in'}
 ]
 
-def create_ingredient(ingredient_name):
-  ingredient = Ingredient(name=ingredient_name)
-  db.session.add(ingredient)
-  db.session.commit()
-
-
+# Seed Ingredients
 for ingredient in ingredients:
-  create_ingredient(ingredient)
+    if not Ingredient.query.filter_by(name=ingredient['name']).first():
+        ingredient_create = Ingredient(**ingredient)
+        db.session.add(ingredient_create)
+        print("Adding", ingredient['name'])
+    else:
+        print("Ignoring", ingredient['name'])
 
-def create_portion(portion_data):
-  try:
-    portion = Portion(name=portion_data[1], abbrivation=portion_data[0])
-    db.session.add(portion)
-    db.session.commit()
-  except:
-    db.session.rollback()
-
+# Seed Portions
 for portion in portions:
-    create_portion(portion)
+    if not Portion.query.filter_by(name=portion['name']).first():
+        portion_create = Portion(**portion)
+        db.session.add(portion_create)
+        print("Adding", portion['name'])
+    else:
+        print("Ignoring", portion['name'])
 
 
-recipe = Recipe(name="LemonLime") #Create a Recipe
-r_ingredient = Ingredient.query.filter_by(name="lime").first() #Get the lime ingredient
-r_ingredient.tags.append(IngredientTag(key="cost", value="$5")) # The lime costs $5
-r_portion = Portion.query.filter_by(name="cup").first() #
-recipeIngredient = RecipeIngredient(ingredient=r_ingredient, quantity="half", portion=r_portion)
-recipe.ingredients.append(recipeIngredient)
-
-db.session.add(recipe)
 db.session.commit()
+
+
