@@ -2,7 +2,6 @@ from flask import request, jsonify, abort
 
 from api import app, db, COMMON, row_to_dict
 
-
 # Importing models
 from api.models.recipe import Recipe
 
@@ -38,14 +37,17 @@ def recipe_index(index):
     return jsonify(response)
 
 
+# TODO: Complete the route for creating a recipe
 @app.route('/api/recipe/create', methods=['POST'])
 def recipe_create():
-    data = request.get_json()
+    recipe = request.get_json()
 
     try:
-        db.session.add()
+        recipe = Recipe(**recipe)
+        db.session.add(recipe)
         db.session.commit()
     except:
+        db.session.rollback()
         abort(500)
 
     return jsonify(COMMON['SUCCESS'])

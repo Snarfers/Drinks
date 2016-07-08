@@ -1,5 +1,4 @@
 from api import db
-print("in recipe model")
 
 # Association Tables
 recipe_recipeIngredient = db.Table('recipe_recipeingredient', db.metadata,

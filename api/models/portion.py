@@ -1,5 +1,4 @@
 from api import db
-print("in portion model")
 
 class Portion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
