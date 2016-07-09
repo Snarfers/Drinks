@@ -1,5 +1,4 @@
-from api import db
-print("in ingredient model")
+from .. import db
 
 ingredient_ingredienttag = db.Table('ingredient_ingredienttag', db.metadata,
     db.Column('ingredient_id', db.Integer, db.ForeignKey('ingredient.id')),

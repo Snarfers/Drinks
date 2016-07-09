@@ -1,11 +1,10 @@
 from flask import request, jsonify, abort
 
-from api import app, db, COMMON, row_to_dict
+from .. import app, db, COMMON, row_to_dict
 
 # Importing models
-from api.models.ingredient import Ingredient
-from api.models.portion import Portion
-
+from ..models.ingredient import Ingredient
+from ..models.portion import Portion
 
 @app.route('/api/ingredient/all', methods=['GET'])
 def ingredient_all():

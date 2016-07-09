@@ -1,4 +1,4 @@
-from api import db
+from .. import db
 
 # Association Tables
 recipe_recipeIngredient = db.Table('recipe_recipeingredient', db.metadata,

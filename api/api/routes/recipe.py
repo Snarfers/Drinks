@@ -1,9 +1,10 @@
 from flask import request, jsonify, abort
 
-from api import app, db, COMMON, row_to_dict
+from .. import app, db, COMMON, row_to_dict
 
 # Importing models
-from api.models.recipe import Recipe
+from ..models.recipe import Recipe
+
 
 @app.route('/api/recipe/all', methods=['GET'])
 def recipe_all():
@@ -49,5 +50,6 @@ def recipe_create():
     except:
         db.session.rollback()
         abort(500)
+
 
     return jsonify(COMMON['SUCCESS'])

@@ -1,4 +1,5 @@
-from api import db
+from .. import db
+
 
 class Portion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
