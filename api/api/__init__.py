@@ -1,24 +1,21 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from os.path import isfile
-
 # Initialize the Application
 app = Flask(__name__)
 
-# Initialize the Database
-db = SQLAlchemy(app)
-
-
 # Application configuration
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///drinks.db"
 
+# Initialize the Database
+db = SQLAlchemy(app)
 
 # CONSTANTS
 COMMON = dict()
 COMMON['SUCCESS'] = {"status": "success", "data": None, "message": None}
 COMMON['DEBUG'] = True
+
 
 def row_to_dict(row, excludes=set()):
     d = {}
