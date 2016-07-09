@@ -1,10 +1,9 @@
 from api import db
-from models.ingredient import Ingredient, IngredientTag
-from models.portion import Portion
-from models.recipe import Recipe, RecipeIngredient
+
+from api.models.portion import Portion
+from api.models.ingredient import Ingredient
 
 db.create_all()
-
 
 ingredients = [
     {'name': 'ice', 'category': 'common', 'subcategory': 'frozen'},
@@ -13,8 +12,11 @@ ingredients = [
     {'name': 'orange', 'category': 'fruit', 'subcategory': 'sweet'},
     {'name': 'salt', 'category': 'common', 'subcategory': 'additive'},
     {'name': 'pepper', 'category': 'common', 'subcategory': 'additive'},
-    {'name': 'sugar', 'category': 'common', 'subcategory': 'additive'}
+    {'name': 'sugar', 'category': 'common', 'subcategory': 'additive'},
+    {'name': 'whiskey', 'category': 'liquor', 'subcategory': 'bourbon'}
 ]
+
+
 
 portions = [
     {'name': 'teaspoon', 'abbreviation': 'tsp'},
