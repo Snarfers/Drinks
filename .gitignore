@@ -8,5 +8,8 @@ __pycache__/
 #Database Ignores
 *.db
 
+# IDEA files
+*.IDEA
+
 #Cache Ignores
 *.DS_Store
