@@ -1,7 +1,7 @@
 from api import db
 
 from api.models.portion import Portion
-from api.models.ingredient import Ingredient
+from api.models.ingredient import Ingredient, Category, Subcategory
 
 db.create_all()
 
@@ -15,8 +15,6 @@ ingredients = [
     {'name': 'sugar', 'category': 'common', 'subcategory': 'additive'},
     {'name': 'whiskey', 'category': 'liquor', 'subcategory': 'bourbon'}
 ]
-
-
 
 portions = [
     {'name': 'teaspoon', 'abbreviation': 'tsp'},
@@ -40,20 +38,32 @@ portions = [
 # Seed Ingredients
 for ingredient in ingredients:
     if not Ingredient.query.filter_by(name=ingredient['name']).first():
-        ingredient_create = Ingredient(**ingredient)
-        db.session.add(ingredient_create)
-        print("Adding", ingredient['name'])
+        ingredient_add = Ingredient(name=ingredient['name'])
+
+        if not Category.query.filter_by(name=ingredient['category']).first():
+            category_add = Category(name=ingredient['category'])
+            db.session.add(category_add)
+
+        if not Subcategory.query.filter_by(name=ingredient['subcategory']).first():
+            subcategory_add = Category(name=ingredient['subcategory'])
+            db.session.add(subcategory_add)
+
+        ingredient_add.category = Category.query.filter_by(name=ingredient['category']).first()
+        ingredient_add.subcategory = Subcategory.query.filter_by(name=ingredient['subcategory']).first()
+
+        db.session.add(ingredient_add)
+        print('Adding', ingredient['name'])
     else:
-        print("Ignoring", ingredient['name'])
+        print('Ignoring', ingredient['name'])
 
 # Seed Portions
 for portion in portions:
     if not Portion.query.filter_by(name=portion['name']).first():
         portion_create = Portion(**portion)
         db.session.add(portion_create)
-        print("Adding", portion['name'])
+        print('Adding', portion['name'])
     else:
-        print("Ignoring", portion['name'])
+        print('Ignoring', portion['name'])
 
 
 db.session.commit()
