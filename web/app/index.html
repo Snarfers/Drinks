@@ -22,39 +22,42 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
           <div class="navbar-header">
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
-            <a class="navbar-brand" href="#/">drinks</a>
+            <a class="navbar-brand" href="#/">Drinks Web API</a>
           </div>
-
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
             <ul class="nav navbar-nav">
-              <li><a ui-sref="ingredientAll">All Ingredients</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ingredients<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a ui-sref="ingredientAll">All Ingredients</a></li>
+                  <li><a ui-sref="ingredientCreate">Create Ingredient</a></li>
+
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container">
-    <div ui-view></div>
+    <div class="container-fluid">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div ui-view></div>
+      </div>
+      <div class="col-md-1"></div>
     </div>
 
     <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
+
     </div>
 
 
@@ -83,13 +86,13 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/ingredientAll.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/ingredientAll.js"></script>
+    <script src="scripts/controllers/ingredientCreate.js"></script>
 
 
     <!-- endbuild -->

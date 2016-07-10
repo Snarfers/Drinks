@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Create Ingredient</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <form>
+      <fieldset class="form-group">
+        <label for="name">Ingredient Name</label>
+        <input type="text" class="form-control" ng-model="ingredient.name" id="name" placeholder="Name">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="category">Category</label>
+        <input type="text" class="form-control" ng-model="ingredient.category" id="category" placeholder="Category">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="subcategory">Subcategory</label>
+        <input type="text" class="form-control" ng-model="ingredient.subcategory" id="subcategory" placeholder="Subcategory">
+      </fieldset>
+      <button type="submit" class="btn btn-primary" ng-click="submitIngredient()">Submit</button>
+    </form>
+  </div>
+</div>
