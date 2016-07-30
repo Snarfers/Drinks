@@ -8,6 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -39,7 +40,13 @@
                 <ul class="dropdown-menu">
                   <li><a ui-sref="ingredientAll">All Ingredients</a></li>
                   <li><a ui-sref="ingredientCreate">Create Ingredient</a></li>
-
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a ui-sref="categoryAll">All Categories</a></li>
+                  <li><a ui-sref="categoryCreate">Create Category</a></li>
                 </ul>
               </li>
             </ul>
@@ -86,13 +93,17 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/ingredientAll.js"></script>
-    <script src="scripts/controllers/ingredientCreate.js"></script>
+    <script src="scripts/controllers/ingredients/ingredientAll.js"></script>
+    <script src="scripts/controllers/ingredients/ingredientCreate.js"></script>
+    <script src="scripts/controllers/categories/categoryAll.js"></script>
+    <script src="scripts/controllers/categories/categoryCreate.js"></script>
+    <script src="scripts/factories/ingredientFactory.js"></script>
 
 
     <!-- endbuild -->

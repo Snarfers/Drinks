@@ -1,0 +1,43 @@
+[4mRunning "serve" task[24m
+
+[4mRunning "clean:server" (clean) task[24m
+[32m>> [39m1 path cleaned.
+
+[4mRunning "wiredep:app" (wiredep) task[24m
+
+[4mRunning "wiredep:test" (wiredep) task[24m
+
+[4mRunning "wiredep:sass" (wiredep) task[24m
+
+[4mRunning "concurrent:server" (concurrent) task[24m
+    
+    [4mRunning "compass:server" (compass) task[24m
+    [32mdirectory[0m .tmp/styles
+    [32m    write[0m .tmp/styles/main.css (3.041s)
+    [32m    write[0m .tmp/styles/main.css.map
+    
+    [32mDone, without errors.[39m
+    
+    
+    Execution Time (2016-07-16 15:05:18 UTC)
+    loading tasks   140ms  ▇▇ 3%
+    compass:server   3.9s  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 96%
+    Total 4.1s
+    
+[4mRunning "postcss:server" (postcss) task[24m
+[32m>> [39m1 processed stylesheet created.
+[32m>> [39m1 sourcemap created.
+
+[4mRunning "connect:livereload" (connect) task[24m
+Started connect web server on http://localhost:9000
+
+[4mRunning "watch" task[24m
+Waiting...
+
+
+Execution Time (2016-07-16 15:05:17 UTC)
+loading tasks      193ms  ▇ 1%
+concurrent:server   4.4s  ▇▇▇▇▇▇▇▇▇▇▇▇ 28%
+postcss:server     494ms  ▇▇ 3%
+Total 16s
+
