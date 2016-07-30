@@ -2,6 +2,7 @@ from api import db
 
 from api.models.portion import Portion
 from api.models.ingredient import Ingredient, Category, Subcategory
+from api.models.recipe import Recipe
 
 db.create_all()
 
@@ -67,5 +68,3 @@ for portion in portions:
 
 
 db.session.commit()
-
-
