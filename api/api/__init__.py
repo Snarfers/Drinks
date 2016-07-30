@@ -1,9 +1,10 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 # Initialize the Application
 app = Flask(__name__)
-
+CORS(app)
 # Application configuration
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///drinks.db"

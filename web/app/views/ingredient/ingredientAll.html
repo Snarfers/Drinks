@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>All Ingredients</h1>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <ul>
+      <li ng-repeat="ingredient in ingredients">
+        {{ingredient.name}} [{{ingredient.category}}]
+      </li>
+    </ul>
+  </div>
+</div>
