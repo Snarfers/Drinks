@@ -11,18 +11,6 @@ def recipe_all():
     recipes = Recipe.query.all()
     response = []
 
-    for recipe in recipes:
-        recipe_data = dict()
-        recipe_data['name'] = recipe.name
-        recipe_data['ingredients'] = []
-        for ingredient in recipe.ingredients:
-            ingredient_data = dict()
-            ingredient_data['name'] = ingredient.ingredient.name
-            ingredient_data['portion'] = {"name": ingredient.portion.name, "abbreviation": ingredient.portion.abbrivation}
-            ingredient_data['quantity'] = ingredient.quantity
-            recipe_data['ingredients'].append(ingredient_data)
-        response.append(recipe_data)
-
     return jsonify(response)
 
 
