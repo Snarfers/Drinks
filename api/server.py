@@ -3,6 +3,9 @@ import sys
 from app import app, db
 
 from app.routes import index
+from app.routes import recipe_create, recipe_list, recipe_find_id, recipe_find_name
+from app.routes import ingredient_create, ingredient_list, ingredient_find_id, ingredient_find_name
+
 
 def run_server():
     app.run(debug=True, use_reloader=False)
