@@ -1,18 +1,24 @@
 from app import db
 
 # Association Tables
-Recipe_Ingredients = db.Table('Ingredients', db.metadata,
+Recipe_Ingredients = db.Table('Recipe_Ingredients', db.metadata,
     db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
     db.Column('ingredient_id', db.Integer, db.ForeignKey('ingredient.id')))
 
-Recipe_Instructions = db.Table('Instructions', db.metadata,
+Recipe_Instructions = db.Table('Recipe_Instructions', db.metadata,
     db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
     db.Column('instruction_id', db.Integer, db.ForeignKey('instruction.id')))
 
+User_Recipes = db.Table('User_Recipes', db.metadata,
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')))
+
+#User Table
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(500), unique=True, index=True)
+    recipes = db.relationship('Recipes', secondary=User_Recipes)
 
 
 #Ingredient Table
