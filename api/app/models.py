@@ -1,5 +1,6 @@
 from app import db
 
+
 # Association Tables
 Recipe_Ingredients = db.Table('Recipe_Ingredients', db.metadata,
     db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
@@ -12,6 +13,7 @@ Recipe_Instructions = db.Table('Recipe_Instructions', db.metadata,
 User_Recipes = db.Table('User_Recipes', db.metadata,
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')))
+
 
 #User Table
 class User(db.Model):
