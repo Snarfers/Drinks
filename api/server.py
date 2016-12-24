@@ -1,9 +1,8 @@
 import sys
 
-from app import app
+from app import app, db
 
-from app.routes.ingredient import ingredient_index, ingredient_category, ingredient_all, ingredient_create
-from app.routes.recipe import recipe_index, recipe_all, recipe_create
+from app.routes import index
 
 def run_server():
     app.run(debug=True, use_reloader=False)
@@ -11,7 +10,7 @@ def run_server():
 
 
 def create_database():
-    # TODO: Seed the database
+    db.create_all()
     pass
 
 
