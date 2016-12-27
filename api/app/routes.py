@@ -24,7 +24,7 @@ def ingredient_create():
     except:
         db.session.rollback()
 
-    return jsonify({'status': 'route not currently implemented'}), 501
+    return jsonify({'status': 'route not currently implemented'}), 200
 
 
 # List all ingredients
@@ -32,7 +32,7 @@ def ingredient_create():
 def ingredient_list():
     ingredients = Ingredient.query.all()
     result = IngredientSchema(many=True).dump(ingredients)
-    return jsonify({"result": result.data})
+    return jsonify({"result": result.data}), 200
 
 
 # Fetch single ingredient by name
