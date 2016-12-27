@@ -1,7 +1,8 @@
 from flask import jsonify
 
-from app import app
+from app import app, db
 from app.models import Ingredient, Recipe, Instruction, Flavor
+from app.models import IngredientSchema, RecipeSchema
 
 # Home Route
 @app.route('/')
@@ -21,6 +22,7 @@ def ingredient_create():
 # List all ingredients
 @app.route('/ingredient/all')
 def ingredient_list():
+    result = Ingredient.query.all()
     return jsonify({'status': 'route not currently implemented'}), 501
 
 
