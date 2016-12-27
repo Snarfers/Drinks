@@ -14,29 +14,41 @@ def index():
 #######################
 
 # Create Ingredient
-@app.route('/ingredient/new')
+@app.route('/ingredient/new', methods=["POST"])
 def ingredient_create():
+    ingredient = Ingredient(**request.json)
+
+    try:
+        db.session.add(ingredient)
+        db.session.commit()
+    except:
+        db.session.rollback()
+
     return jsonify({'status': 'route not currently implemented'}), 501
 
 
 # List all ingredients
 @app.route('/ingredient/all')
 def ingredient_list():
-    result = Ingredient.query.all()
-    return jsonify({'status': 'route not currently implemented'}), 501
+    ingredients = Ingredient.query.all()
+    result = IngredientSchema(many=True).dump(ingredients)
+    return jsonify({"result": result.data})
 
 
 # Fetch single ingredient by name
 @app.route('/ingredient/<string:name>')
 def ingredient_find_name(name):
-    return jsonify({'status': 'route not currently implemented'}), 501
+    ingredient = Ingredient.query.filter_by(name=name).first()
+    result = IngredientSchema(many=False).dump(ingredient)
+    return jsonify({"result": result}), 200
 
 
 # Fetch single ingredient by id
 @app.route('/ingredient/<int:id>')
 def ingredient_find_id(id):
-    return jsonify({'status': 'route not currently implemented'}), 501
-
+    ingredient = Ingredient.query.filter_by(id=id).first()
+    result = IngredientSchema(many=False).dump(ingredient)
+    return jsonify({"result": result}), 200
 
 #######################
 ## RECIPE ROUTES ##
