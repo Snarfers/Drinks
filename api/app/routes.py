@@ -24,7 +24,7 @@ def ingredient_create():
     except:
         db.session.rollback()
 
-    return jsonify({'status': 'route not currently implemented'}), 200
+    return jsonify({'status': 'success'}), 200
 
 
 # List all ingredients
@@ -40,7 +40,7 @@ def ingredient_list():
 def ingredient_find_name(name):
     ingredient = Ingredient.query.filter_by(name=name).first()
     result = IngredientSchema(many=False).dump(ingredient)
-    return jsonify({"result": result}), 200
+    return jsonify({"result": result.data}), 200
 
 
 # Fetch single ingredient by id
@@ -48,7 +48,7 @@ def ingredient_find_name(name):
 def ingredient_find_id(id):
     ingredient = Ingredient.query.filter_by(id=id).first()
     result = IngredientSchema(many=False).dump(ingredient)
-    return jsonify({"result": result}), 200
+    return jsonify({"result": result.data}), 200
 
 #######################
 ## RECIPE ROUTES ##
@@ -70,16 +70,20 @@ def recipe_create():
 # List all recipes
 @app.route('/recipe/all')
 def recipe_list():
-    return jsonify({'status': 'route not currently implemented'}), 501
-
+    recipes = Recipe.query.all()
+    result = RecipeSchema(many=True).dump(recipes)
+    return jsonify({"result": result.data}), 200
 
 # Fetch single recipe by name
 @app.route('/recipe/find/<string:name>')
 def recipe_find_name(name):
-    return jsonify({'status': 'route not currently implemented'}), 501
-
+    recipe = Recipe.query.filter_by(name=name).first()
+    result = RecipeSchema(many=False).dump(recipe)
+    return jsonify({"result": result.data}), 200
 
 # Fetch single recipe by id
 @app.route('/recipe/find/<int:id>')
 def recipe_find_id(id):
-    return jsonify({'status': 'route not currently implemented'}), 501
+    recipe = Recipe.query.filter_by(id=id).first()
+    result = RecipeSchema(many=False).dump(recipe)
+    return jsonify({"result": result.data}), 200
