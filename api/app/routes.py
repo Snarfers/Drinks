@@ -55,10 +55,17 @@ def ingredient_find_id(id):
 #######################
 
 # Create Recipe
-@app.route('/recipe/new')
+@app.route('/recipe/new', methods=["POST"])
 def recipe_create():
-    return jsonify({'status': 'route not currently implemented'}), 501
+    recipe = Recipe(**request.json)
 
+    try:
+        db.session.add(recipe)
+        db.session.commit()
+    except:
+        db.session.rollback()
+
+    return jsonify({'status': 'success'}), 200
 
 # List all recipes
 @app.route('/recipe/all')
