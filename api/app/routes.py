@@ -67,6 +67,7 @@ def recipe_create():
 
     return jsonify({'status': 'success'}), 200
 
+
 # List all recipes
 @app.route('/recipe/all')
 def recipe_list():
@@ -74,12 +75,14 @@ def recipe_list():
     result = RecipeSchema(many=True).dump(recipes)
     return jsonify({"result": result.data}), 200
 
+
 # Fetch single recipe by name
 @app.route('/recipe/find/<string:name>')
 def recipe_find_name(name):
     recipe = Recipe.query.filter_by(name=name).first()
     result = RecipeSchema(many=False).dump(recipe)
     return jsonify({"result": result.data}), 200
+
 
 # Fetch single recipe by id
 @app.route('/recipe/find/<int:id>')
