@@ -1,4 +1,5 @@
 import sys
+import json
 
 from app import app, db
 
@@ -14,7 +15,7 @@ def run_server():
 
 def create_database():
     db.create_all()
-    pass
+    return
 
 
 def seed_database():
